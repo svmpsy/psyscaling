@@ -1,4 +1,5 @@
 from setuptools import setup, find_packages
+import setuptools
 
 #import pathlib
 #here = pathlib.Path(__file__).parent.resolve()
@@ -17,14 +18,14 @@ setup(
     long_description=readme,
     long_description_content_type="text/markdown",
     url="https://github.com/svmpsy/psyscaling.git",
-    packages=find_packages(), 
-    install_requires=requirements,
+    packages=setuptools.find_packages(),
+    install_requires=['pymorphy2', 're', 'nltk'],
     classifiers=[
         "Programming Language :: Python :: 3.7",
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
     ],
-    
-    #install_requires=['pymorphy2', 're', 'nltk'],
-    
+       
     data_files=[("sensdict.csv", ["dict/sensdict.csv"])],
+    
+    python_requires='>=3.7',
 )
