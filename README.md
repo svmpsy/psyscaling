@@ -9,7 +9,8 @@ author: "С. В. Морозова"
 
 - установка
 1) conda install -c anaconda git или pip install git
-2) 
+2) pip install git+https://github.com/svmpsy/psyscaling.git
+
 - сiting
 
 *mylink*
