@@ -1,5 +1,7 @@
 from setuptools import setup, find_packages
-import pathlib
+
+#import pathlib
+#here = pathlib.Path(__file__).parent.resolve()
 
 with open("README.md", "r") as readme_file:
     readme = readme_file.read()
