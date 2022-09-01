@@ -22,6 +22,10 @@ pip install git или conda install -c anaconda git*
 
 *Для использования некоторых функций потребуется установка библиотеки re, csv.*
 
+- discr
+
+При использовании кодировки utf-8 в файлах .csv и .txt: если 0-й элемент в str считывается как '\ufeff', смените кодировку с utf-8 на utf-8-sig
+
 - сiting
 
 Morozova S.V. Package "psyscaling" for Python / GitHub. - 2022. - URL: https://github.com/svmpsy/psyscaling.git
