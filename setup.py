@@ -24,7 +24,7 @@ setup(
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
     ],
     
-    install_requires=['pymorphy2', 're', 'nltk'],
+    #install_requires=['pymorphy2', 're', 'nltk'],
     
     data_files=[("sensdict.csv", ["dict/sensdict.csv"])],
 )
