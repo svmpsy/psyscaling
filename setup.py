@@ -22,7 +22,7 @@ setup(
     install_requires=['pymorphy2', 're', 'nltk'],
     classifiers=[
         "Programming Language :: Python :: 3.7",
-        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+        "License :: MIT License",
     ],
        
     data_files=[("sensdict.csv", ["dict/sensdict.csv"])],
