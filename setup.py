@@ -19,7 +19,7 @@ setup(
     long_description_content_type="text/markdown",
     url="https://github.com/svmpsy/psyscaling.git",
     packages=setuptools.find_packages(),
-    install_requires=['pymorphy2', 're', 'nltk'],
+    install_requires=['pymorphy2', 'nltk'],
     classifiers=[
         "Programming Language :: Python :: 3.7",
         "License :: MIT License",
