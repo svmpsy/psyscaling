@@ -1,7 +1,7 @@
 <!---
 title: "README"
 date: '2022-09-01'
-author: "С. В. Морозова"
+author: "Morozova S.V."
 --->
 - psyscaling
 
@@ -11,9 +11,11 @@ author: "С. В. Морозова"
 
 *pip install git+https://github.com/svmpsy/psyscaling.git*
 
-*Если возникают проблемы, сначала можно установить git:
-conda install -c anaconda git или pip install git*
+*If there are problems, you can first install git:
+pip install git или conda install -c anaconda git*
+
+*You can also download the archive from GitHub and install it offline.*
 
 - сiting
 
-*mylink*
+Morozova S.V. Package "psyscaling" for Python. [Электронный ресурс]. - 2022. - Дата обновления: 01.09.2022. URL: https://github.com/svmpsy/psyscaling.git
