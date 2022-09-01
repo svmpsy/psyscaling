@@ -3,6 +3,10 @@ title: "README"
 date: '2022-09-01'
 author: "Morozova S.V."
 --->
+
+Morozova S.V. 
+Package "psyscaling" for Python
+
 - psyscaling
 
 *Psychological scaling of text and graphic information. Used to prepare experimental data for quantitative analysis. Supports only Russian language now.*
@@ -18,4 +22,4 @@ pip install git или conda install -c anaconda git*
 
 - сiting
 
-Morozova S.V. Package "psyscaling" for Python. [Электронный ресурс]. - 2022. - Дата обновления: 01.09.2022. URL: https://github.com/svmpsy/psyscaling.git
+Morozova S.V. Package "psyscaling" for Python. [Электронный ресурс]. - 2022. - URL: https://github.com/svmpsy/psyscaling.git
