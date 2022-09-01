@@ -22,4 +22,6 @@ setup(
     ],
     
     install_requires=['pymorphy2', 're', 'nltk'],
+    
+    data_files=[("sensdict.csv", ["dict/sensdict.csv"])],
 )
