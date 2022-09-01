@@ -7,6 +7,6 @@ author: "С. В. Морозова"
 
 Psychological scaling of text and graphic information. Used to prepare experimental data for quantitative analysis. Supports only Russian language now.
 
-- Citing
+- сiting
 
 *mylink*
