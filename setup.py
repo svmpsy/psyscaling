@@ -17,7 +17,10 @@ setup(
     long_description=readme,
     long_description_content_type="text/markdown",
     url="https://github.com/svmpsy/psyscaling.git",
-    packages=find_packages(), 
+    packages=[
+        'psyscaling',
+        'psyscaling.text',
+    ], 
     install_requires=requirements,
     classifiers=[
         "Programming Language :: Python :: 3.7",
