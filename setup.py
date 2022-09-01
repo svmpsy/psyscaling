@@ -19,7 +19,7 @@ setup(
     url="https://github.com/svmpsy/psyscaling.git",
     packages=[
         'psyscaling',
-        'psyscaling.text',
+        'text',
     ], 
     install_requires=requirements,
     classifiers=[
