@@ -7,6 +7,9 @@ author: "С. В. Морозова"
 
 *Psychological scaling of text and graphic information. Used to prepare experimental data for quantitative analysis. Supports only Russian language now.*
 
+- установка
+1) conda install -c anaconda git или pip install git
+2) 
 - сiting
 
 *mylink*
