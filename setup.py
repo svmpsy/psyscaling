@@ -25,7 +25,7 @@ setup(
         "License :: MIT License",
     ],
        
-    data_files=[("sensdict.csv", ["dict/sensdict.csv"])],
+    data_files=[("sensdict.csv", ["psyscaling/textanalysis/dict/sensdict.csv"])],
     
     python_requires='>=3.7',
 )
