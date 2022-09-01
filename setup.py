@@ -16,7 +16,7 @@ setup(
     description="Psychological scaling of text and graphic information. Used to prepare experimental data for quantitative analysis.",
     long_description=readme,
     long_description_content_type="text/markdown",
-    url="https://github.com/svmpsy/psyscaling/",
+    url="https://github.com/svmpsy/psyscaling.git",
     packages=['psyscaling'],
     install_requires=requirements,
     classifiers=[
