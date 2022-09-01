@@ -20,6 +20,8 @@ pip install git или conda install -c anaconda git*
 
 *You can also download the archive from GitHub and install it offline.*
 
+*Для использования некоторых функций потребуется установка библиотеки re.*
+
 - сiting
 
 Morozova S.V. Package "psyscaling" for Python / GitHub. - 2022. - URL: https://github.com/svmpsy/psyscaling.git
