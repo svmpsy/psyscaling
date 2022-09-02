@@ -45,7 +45,7 @@ def words_from_txt(file, encoding1):
                 for word in myarray: #list2str
                     if len(word)>3: #для слов, состоящих из более чем 3 букв
                         mytext = mytext+' '+morph.parse(word)[0].normal_form #Бежим по словам добавляем нормальную форму слов в mywords
-    #print('создали mytext')
+    #print('tokenized')
 
     mytext1 = mytext.replace('.','') #удаляем точки из текста
       
@@ -69,14 +69,14 @@ def count_dict_analysis(words:list, dict1:dict):
     Parameters
     ----------
     words : list
-        Принимает список токенов в формате list.
+        Accepts a list of tokens in the format list.
     dict1 : dict
-        Принимает словарь слов (=keys) с категориями (=values) в формате dict.
+        Accepts a dictionary of words (=keys) with categories (=values) in dict format.
 
     Returns
     -------
     count : dict
-        Возвращает словарь с категориями (=keys) и частотой их встречаемости (=values) в формате dict.
+        Returns a dictionary with categories (=keys) and their frequency (=values) in dict format.
 
     """
     
@@ -106,14 +106,14 @@ def dict2_csv(file, encoding2, delimiter2):
     file : TYPE
         File csv. The table has only two columns!
     encoding2 : TYPE
-        DESCRIPTION.
+        utf-8 etc.
     delimiter2 : TYPE
-        DESCRIPTION.
+        ';' or other.
 
     Returns
     -------
     mydict : dict
-        DESCRIPTION.
+        Returns a dictionary with tokens (=keys) and their categories (=values) in dict format.
 
     """
     import csv
@@ -133,9 +133,9 @@ def dictn_csv(file, encoding2, delimiter2, n:int):
     file : TYPE
         File csv. The table has several columns.
     encoding2 : TYPE
-        DESCRIPTION.
+        utf-8 etc.
     delimiter2 : TYPE
-        DESCRIPTION.
+        ';' or other.
     n : int
         n values. n<=5
 
@@ -147,7 +147,7 @@ def dictn_csv(file, encoding2, delimiter2, n:int):
     Returns
     -------
     mydict : dict
-        user dictionary in dict with several values.
+        User dictionary in dict with several values.
 
     """
 
