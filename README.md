@@ -4,14 +4,14 @@ date: '2022-09-01'
 author: "Morozova S.V."
 --->
 
-Morozova S.V. 
-Package "psyscaling" for Python
+**Morozova S.V. 
+Package "psyscaling" for Python**
 
-- psyscaling
+**- Info**
 
 *Psychological scaling of text and graphic information. Used to prepare experimental data for quantitative analysis. Supports only Russian language now.*
 
-- установка
+**- setup**
 
 *pip install git+https://github.com/svmpsy/psyscaling.git*
 
@@ -20,15 +20,16 @@ pip install git или conda install -c anaconda git*
 
 *You can also download the archive from GitHub and install it offline.*
 
-*Для использования некоторых функций потребуется установка библиотеки re, csv.*
+*Some functions require libraries: re, csv.*
 
-- discr
+**- discr**
 
 При использовании кодировки utf-8 в файлах .csv и .txt: если 0-й элемент в str считывается как '\ufeff', смените кодировку с utf-8 на utf-8-sig
 
-- сiting
+**- сiting**
 
 Morozova S.V. Package "psyscaling" for Python / GitHub. - 2022. - URL: https://github.com/svmpsy/psyscaling.git
 
-- Copyright
-Copyright (C) 2022 S.V. Morozova
+**- Copyright**
+
+*Copyright (C) 2022, S.V. Morozova*
