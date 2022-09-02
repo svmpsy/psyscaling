@@ -228,16 +228,16 @@ def countdictplot(dictionary:dict, lang:str, title:str, rotat:int):
 
 
 
-if __name__ == "__main__":
+#if __name__ == "__main__":
 
 #    mydict_test1 = dict2_csv(r'd:\mydata\sensdict_young.csv', encoding2='utf-8-sig', delimiter2=';')
-    mydict_test2 = dictn_csv(r'd:\mydata\rusentilex_2017.csv', encoding2='utf-8-sig', delimiter2=';', n=4)
+#    mydict_test2 = dictn_csv(r'd:\mydata\rusentilex_2017.csv', encoding2='utf-8-sig', delimiter2=';', n=4)
 
     
-    datawords = words_from_txt('Anan2019.txt', encoding1='utf-8-sig')
-    print('создали mytext')
+#    datawords = words_from_txt('Anan2019.txt', encoding1='utf-8-sig')
+#    print('создали mytext')
     
-    count_sens_words = count_dict_analysis(datawords, mydict_test2)
+#    count_sens_words = count_dict_analysis(datawords, mydict_test2)
     
-    mydict_test2 = countdictplot(count_sens_words,title='Частотный анализ категорий ощущений различной модельности', lang='eng', rotat=90)
+#    mydict_test2 = countdictplot(count_sens_words,title='Частотный анализ категорий ощущений различной модельности', lang='eng', rotat=90)
 
