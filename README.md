@@ -4,8 +4,7 @@ date: '2022-09-01'
 author: "Morozova S.V."
 --->
 
-**Morozova S.V. 
-Package "psyscaling" for Python**
+**PACKAGE "PSYSCALING" FOR PYTHON**
 
 **- Info**
 
