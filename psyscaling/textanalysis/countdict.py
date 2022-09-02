@@ -234,7 +234,7 @@ def countdictplot(dictionary:dict, lang:str, title:str, rotat:int):
 #    mydict_test2 = dictn_csv(r'd:\mydata\rusentilex_2017.csv', encoding2='utf-8-sig', delimiter2=';', n=4)
     
 #    datawords = words_from_txt('Anan2019.txt', encoding1='utf-8-sig')
-#    print('создали mytext')
+#    print('токенизировали')
     
 #    count_sens_words = count_dict_analysis(datawords, mydict_test2)
     
