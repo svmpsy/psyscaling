@@ -29,3 +29,6 @@ pip install git или conda install -c anaconda git*
 - сiting
 
 Morozova S.V. Package "psyscaling" for Python / GitHub. - 2022. - URL: https://github.com/svmpsy/psyscaling.git
+
+- Copyright
+Copyright (C) 2022 S.V. Morozova
