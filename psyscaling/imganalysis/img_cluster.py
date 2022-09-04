@@ -243,6 +243,6 @@ def brightness_hist(img:str,color='L',title='Яркость изображени
 
 #    distance_color_clasters=color_clasters(r'd:\img\test9.jpg',300)
 #    aov_claster(distance_color_clasters)
-#    kwtest(distance_Luscher_clasters)
+#    kwtest(distance_color_clasters)
 #    mean_color=brightness_hist(r'd:\img\test9.jpg',color='RGB')
     
