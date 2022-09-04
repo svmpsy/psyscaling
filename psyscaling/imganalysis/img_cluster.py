@@ -11,13 +11,17 @@ from PIL import Image
 from scipy.cluster.vq import kmeans, vq 
 import matplotlib.pyplot as plt
 
+rgb_basic_colors = np.array([[0., 0., 255.], [0., 255., 0.], [255., 0., 0.],
+                             [0., 255., 255.], [255., 0., 255.], [255., 255., 0.]])
 
-def Luscher_clasters(img:str, part:int):
+
+def color_clasters(img:str,part:int,centroids=rgb_basic_colors):
     """
-    Оценивает расстояние от цветов Люшера (центроидов) до каждого пикселя изображения.
+    Оценивает расстояние от заданных цветов (центроидов) до каждого пикселя изображения.
+    Базовая палитра - 6 основных цветов RGB.
     Предварительно изображение преобразуется в квадратное с определенным количеством пикселей.
     Процедура сжатия производится усреднением цветов по каналам R, G, B.
-    Расстояние между центроидами и пикселями расчитываются с помощью квадрата евклидова расстояния.
+    Расстояния между центроидами и пикселями расчитываются с помощью квадрата евклидова расстояния.
 
     Parameters
     ----------
@@ -27,11 +31,13 @@ def Luscher_clasters(img:str, part:int):
         Изображение преобразуется в квадратное. 
         Параметр указывает количество пикселей по каждой стороне. 
         Не может быть больше исходного размера изображения.
+    centroids : np.array
+        Цвета центроидов. По умолчанию 6 базовых цветов RGB.
 
     Returns
     -------
     aovdt : pd.DataFrame
-        Датафрейм, включающий дистанции от цветов Люшера и номера центроидов.
+        Датафрейм, включающий дистанции от цветов палитры и номера центроидов.
 
     """
     
@@ -56,17 +62,8 @@ def Luscher_clasters(img:str, part:int):
             features.append([R,G,B])
     features = np.array(features, "f")
 
-    Luscher_centroid = np.array([[30., 40., 100.],
-                                  [35., 105., 115.],
-                                  [240., 80., 55.],
-                                  [255., 250., 105.],
-                                  [175., 55., 105.],
-                                  [155., 115., 95.],
-                                  [0., 0., 0.],
-                                  [185., 185., 185.]])
-
                    
-    code,distance = vq(features,Luscher_centroid) #вычисляем евклидово расстояние между пикселями изображения и центроидами
+    code,distance = vq(features,centroids) #вычисляем евклидово расстояние между пикселями изображения и центроидами
     codeim = code.reshape(steps,steps)
 
     plt.figure()
@@ -77,19 +74,19 @@ def Luscher_clasters(img:str, part:int):
     #круговая диаграмма, cnts-размер в пикселях
     a, cnts = np.unique(codeim, return_counts=True)
     percent = np.array(cnts)*100/np.sum(cnts)
-    plt.pie(percent,colors=np.array(Luscher_centroid/255),labels=a)
+    plt.pie(percent,colors=np.array(centroids/255),labels=a)
     plt.show()
     perc = pd.DataFrame({'claster':a,'percent':percent})
-    print('проценты встречаемости цветов Люшера в изображении')
+    print('проценты встречаемости цветов палитры в изображении')
     print(perc)
     print()
 
     cmax = max(percent)
     ind_max_centroid = np.where(percent == cmax)
     d1=ind_max_centroid[0]
-    d2=Luscher_centroid[d1[0]]
+    d2=centroids[d1[0]]
     Luscher_RGB = pd.DataFrame({'claster':d1,'R':d2[0],'G':d2[1],'B':d2[2]})
-    print('самый часто встречающийся цвет:')
+    print('самый часто встречающийся цвет палитры:')
     print(Luscher_RGB)
     print()
     
@@ -107,7 +104,7 @@ def aov_claster(df:pd.DataFrame):
     Parameters
     ----------
     df : pd.DataFrame
-        Результаты выполнения функции Luscher_clasters().
+        Результаты выполнения функции Color_clasters().
 
     Returns
     -------
@@ -156,13 +153,13 @@ def aov_claster(df:pd.DataFrame):
 
 def kwtest(df:pd.DataFrame):
     """
+    Вычисляется непараметрический критерий H Kruskal–Wallis. 
     Выводит графики: barplot c median.
-    Также выводятся результаты непараметрического критерия H Kruskal–Wallis.
 
     Parameters
     ----------
     df : pd.DataFrame
-        DESCRIPTION.
+        Результаты выполнения функции Luscher_clasters().
 
     Returns
     -------
@@ -190,8 +187,7 @@ def kwtest(df:pd.DataFrame):
 def brightness_hist(img:str,color='L',title='Яркость изображения',
                     xlb='Яркость',ylb='Количество пикселей'):
     """
-    Гистограмма яркости изображения. Палитры: grey or RGB.
-    Оцениваем среднюю яркость изображения.
+    Гистограмма яркости изображения. Палитры: grey or RGB
 
     Parameters
     ----------
@@ -245,8 +241,8 @@ def brightness_hist(img:str,color='L',title='Яркость изображени
 
 #if __name__ == "__main__":
 
-#    distance_Luscher_clasters=Luscher_clasters(r'd:\img\test1.jpg',500)
-#    aov_claster(distance_Luscher_clasters)
+#    distance_color_clasters=color_clasters(r'd:\img\test9.jpg',300)
+#    aov_claster(distance_color_clasters)
 #    kwtest(distance_Luscher_clasters)
-#    mean_color=brightness_hist(r'd:\img\test1.jpg',color='RGB')
+#    mean_color=brightness_hist(r'd:\img\test9.jpg',color='RGB')
     
