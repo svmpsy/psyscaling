@@ -2,7 +2,7 @@
 """
 Created on Sun Sep  4 15:32:44 2022
 
-@author: msv-g
+@author: Svetlana V. Morozova
 """
 
 import numpy as np
