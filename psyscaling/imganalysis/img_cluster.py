@@ -14,8 +14,17 @@ import matplotlib.pyplot as plt
 rgb_basic_colors = np.array([[0., 0., 255.], [0., 255., 0.], [255., 0., 0.],
                              [0., 255., 255.], [255., 0., 255.], [255., 255., 0.]])
 
+Luscher_centroid = np.array([[30., 40., 100.],
+                              [35., 105., 115.],
+                              [240., 80., 55.],
+                              [255., 250., 105.],
+                              [175., 55., 105.],
+                              [155., 115., 95.],
+                              [0., 0., 0.],
+                              [185., 185., 185.]])
 
-def color_clasters(img:str,part:int,centroids=rgb_basic_colors):
+
+def color_clasters(img:str,part:int,thumbnail=False,centroids=rgb_basic_colors):
     """
     Оценивает расстояние от заданных цветов (центроидов) до каждого пикселя изображения.
     Базовая палитра - 6 основных цветов RGB.
@@ -26,11 +35,17 @@ def color_clasters(img:str,part:int,centroids=rgb_basic_colors):
     Parameters
     ----------
     img : str
-        Адрес изображения.
+        Адрес изображения. Работает с изображениями форматов: bmp, jpg, png, tif.
     part : int
-        Изображение преобразуется в квадратное. 
         Параметр указывает количество пикселей по каждой стороне. 
         Не может быть больше исходного размера изображения.
+    thumbnail : logical, optional
+        Если False - зображение преобразуется в квадратное через усреднение цветности пикселей.   
+        Если True, то изображение преобразуется в миниатюру с сохраненинем пропорций
+        с помощью функции Image.thumbnail(). 
+        Параметр part указывает количество пикселей по большей стороне. 
+        Если изображение квадратное, то part указывает количество пикселей по обеим сторонам.
+        The default is False.
     centroids : np.array
         Цвета центроидов. По умолчанию 6 базовых цветов RGB.
 
@@ -38,33 +53,78 @@ def color_clasters(img:str,part:int,centroids=rgb_basic_colors):
     -------
     aovdt : pd.DataFrame
         Датафрейм, включающий дистанции от цветов палитры и номера центроидов.
-
+        
     """
-    
-    im = np.array(Image.open(img))
-    print()
-    print('Информация об изображении [height, width, channels]:', im.shape )
-    print()
+       
+    if thumbnail == False:
+        
+        im = np.array(Image.open(img))
+        print()
+        print('Информация об изображении [height, width, channels]:', im.shape )
+        print()
+        
+        steps = part
+        dx = im.shape[0] / steps
+        dy = im.shape[1] / steps
+        dx = int(dx)
+        dy = int(dy)
 
-    steps = part
-    dx = im.shape[0] / steps
-    dy = im.shape[1] / steps
-    dx = int(dx)
-    dy = int(dy)
+        features = []
 
-    features = []
+        for x in range(steps): #расчитываем средние значения по каналам для каждого из n квадратов (steps)
+            for y in range(steps):
+                R = np.mean(im[x*dx:(x+1)*dx, y*dy:(y+1)*dy, 0])
+                G = np.mean(im[x*dx:(x+1)*dx, y*dy:(y+1)*dy, 1])
+                B = np.mean(im[x*dx:(x+1)*dx, y*dy:(y+1)*dy, 2])
+                features.append([R,G,B])
+        features = np.array(features, "f")
+        
+        im_size = (steps,steps)
+        
+    if thumbnail == True:
+        
+        im = Image.open(img)
+        print()
+        print('Информация об изображении:')
+        print("Size : ",im.size)
+        print()
+        
+        n = part
+        #w = float()
+        #h = float()
+        if im.height > im.width:
+            h = n
+            #w = (n*im.height)/im.width
+            w = (n*im.width)/im.height
+            w = int(w)
+            size = (w, h)
+        elif im.height < im.width:          
+            w = n
+            #h = (n*im.width)/im.height
+            h = (n*im.height)/im.width
+            h = int(h)
+            size = (w, h)
+        elif im.height == im.width:
+            size = (n, n)
 
-    for x in range(steps): #расчитываем средние значения по каналам для каждого из n квадратов (steps)
-        for y in range(steps):
-            R = np.mean(im[x*dx:(x+1)*dx, y*dy:(y+1)*dy, 0])
-            G = np.mean(im[x*dx:(x+1)*dx, y*dy:(y+1)*dy, 1])
-            B = np.mean(im[x*dx:(x+1)*dx, y*dy:(y+1)*dy, 2])
-            features.append([R,G,B])
-    features = np.array(features, "f")
+        im.thumbnail(size)
+        
+        im_size = (im.size[1],im.size[0])
+        
+        im = np.array(im)
+        
+        features = []
 
+        for x in range(len(im)): #по всем столбцам массива
+            for y in range(len(im[0]+1)): #идти по всем строкам первого столбца
+                R = (im[x, y, 0])
+                G = (im[x, y, 1])
+                B = (im[x, y, 2])
+                features.append([R,G,B])
+        features = np.array(features, "f")  
                    
     code,distance = vq(features,centroids) #вычисляем евклидово расстояние между пикселями изображения и центроидами
-    codeim = code.reshape(steps,steps)
+    codeim = code.reshape(im_size)
 
     plt.figure()
     plt.imshow(codeim)
@@ -108,7 +168,7 @@ def aov_claster(df:pd.DataFrame):
 
     Returns
     -------
-    None.
+    Моду и медиану для значений попиксельных расстояний до центроидов.
 
     """
     
@@ -116,6 +176,7 @@ def aov_claster(df:pd.DataFrame):
     import matplotlib.pyplot as plt
     import statsmodels.api as sm
     import seaborn as sns
+    from numpy import mean
 
     aovdt = df
     
@@ -148,6 +209,10 @@ def aov_claster(df:pd.DataFrame):
     print('POST-HOC')
     print(res.tukey_summary)
     print()
+    
+    descript_stat = aovdt.groupby(['code']).aggregate(['mean','median'])
+    
+    return descript_stat
 
 
 
@@ -163,25 +228,29 @@ def kwtest(df:pd.DataFrame):
 
     Returns
     -------
-    None.
+    Моду и медиану для значений попиксельных расстояний до центроидов.
 
     """
     
-    from scipy import stats
+    #from scipy import stats
     import seaborn as sns
     from numpy import median
+    from pingouin import kruskal
     
     aovdt = df
     
-    kw=stats.kruskal(aovdt['code'] == 0, aovdt['code'] == 1, aovdt['code'] == 2, 
-                  aovdt['code'] == 3, aovdt['code'] == 4, aovdt['code'] == 5,
-                  aovdt['code'] == 6, aovdt['code'] == 7)
+    descript_stat = aovdt.groupby(['code']).aggregate(['mean','median'])
+    
+    kw = kruskal(data=aovdt, dv='distance', between='code')
+    
     print('Kruskal–Wallis')
     print(kw) 
     print()
     
     plt2=sns.barplot(x='code', y='distance', data=aovdt, color='gray', estimator = median)
     plt2
+    
+    return descript_stat
 
     
 def brightness_hist(img:str,color='L',title='Яркость изображения',
@@ -239,10 +308,9 @@ def brightness_hist(img:str,color='L',title='Яркость изображени
     return mean_color
     
 
-#if __name__ == "__main__":
+#if __name__ == "__main__":  
 
-#    distance_color_clasters=color_clasters(r'd:\img\test9.jpg',300)
-#    aov_claster(distance_color_clasters)
-#    kwtest(distance_color_clasters)
-#    mean_color=brightness_hist(r'd:\img\test9.jpg',color='RGB')
-    
+#    distance_color_clasters=color_clasters(r'd:\img\test2.jpg',300,thumbnail=True)
+#    descript_stat=aov_claster(distance_color_clasters)
+#    descript_stat=kwtest(distance_color_clasters)
+#    mean_color=brightness_hist(r'd:\img\Shishkin\1889.jpg',color='RGB')
