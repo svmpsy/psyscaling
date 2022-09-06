@@ -20,7 +20,7 @@ setup(
     url="https://github.com/svmpsy/psyscaling.git",
     packages=setuptools.find_packages(),
     install_requires=['pymorphy2', 'nltk', 'matplotlib', 'numpy',
-                     'pandas', 'Pillow', 'imhist', 'IPython', 'cv2', 'scipy', 
+                     'pandas', 'Pillow', 'imhist', 'IPython', 'scipy', 
                       'seaborn', 'bioinfokit', 'statsmodels', 'pingouin'],
     classifiers=[
         "Programming Language :: Python :: 3.7",
