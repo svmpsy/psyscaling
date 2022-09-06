@@ -19,7 +19,7 @@ pip install git или conda install -c anaconda git*
 
 *You can also download the archive from GitHub and install it offline.*
 
-*Some functions require libraries: re, csv, pandas, Pillow, imhist, IPython, cv2, scipy, seaborn, bioinfokit, statsmodels, pingouin.*
+*Some functions require libraries: re, csv, cv2, scipy, seaborn, bioinfokit, statsmodels, pingouin.*
 
 **- discr**
 
