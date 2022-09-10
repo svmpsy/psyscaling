@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 rgb_basic_colors = np.array([[0., 0., 255.], [0., 255., 0.], [255., 0., 0.],
                              [0., 255., 255.], [255., 0., 255.], [255., 255., 0.]])
 
-Luscher_centroid = np.array([[30., 40., 100.],
+L_centroid = np.array([[30., 40., 100.],
                               [35., 105., 115.],
                               [240., 80., 55.],
                               [255., 250., 105.],
@@ -37,7 +37,7 @@ def color_clasters(img:str,part:int,thumbnail=False,centroids=rgb_basic_colors):
     img : str
         Адрес изображения. Работает с изображениями форматов: bmp, jpg, png, tif.
     part : int
-        Параметр указывает количество пикселей по каждой стороне. 
+        Параметр указывает количество пикселей по большей стороне. 
         Не может быть больше исходного размера изображения.
     thumbnail : logical, optional
         Если False - зображение преобразуется в квадратное через усреднение цветности пикселей.   
@@ -129,12 +129,20 @@ def color_clasters(img:str,part:int,thumbnail=False,centroids=rgb_basic_colors):
     plt.figure()
     plt.imshow(codeim)
     plt.show()
-    #plt.savefig('c:/mydata/image/kmeanspic.png') #сохраняем диаграмму в файл
-
+    
     #круговая диаграмма, cnts-размер в пикселях
     a, cnts = np.unique(codeim, return_counts=True)
     percent = np.array(cnts)*100/np.sum(cnts)
-    plt.pie(percent,colors=np.array(centroids/255),labels=a)
+    
+    #выбираем в палитре только существующие цвета
+    l=0
+    cent1=np.zeros([len(a),3])
+    for i in a:
+        cent1[l]=centroids[i]/255
+        l=l+1
+    
+    #рисуем
+    plt.pie(percent,colors=cent1,labels=a)
     plt.show()
     perc = pd.DataFrame({'claster':a,'percent':percent})
     print('проценты встречаемости цветов палитры в изображении')
@@ -164,7 +172,7 @@ def aov_claster(df:pd.DataFrame):
     Parameters
     ----------
     df : pd.DataFrame
-        Результаты выполнения функции Color_clasters().
+        Результаты выполнения функции color_clasters().
 
     Returns
     -------
@@ -224,7 +232,7 @@ def kwtest(df:pd.DataFrame):
     Parameters
     ----------
     df : pd.DataFrame
-        Результаты выполнения функции Luscher_clasters().
+        Результаты выполнения функции color_clasters().
 
     Returns
     -------
