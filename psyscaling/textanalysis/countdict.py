@@ -178,6 +178,47 @@ def dictn_csv(file, encoding2, delimiter2, n:int):
     return mydict
 
 
+def dictn_part_csv(file, encoding2, delimiter2, part:int):
+    """
+    Loading user dictionary with one key and one value (1 from n).
+
+    Parameters
+    ----------
+    file : TYPE
+        File csv. The table has several columns.
+    encoding2 : TYPE
+        DESCRIPTION.
+    delimiter2 : TYPE
+        DESCRIPTION.
+    part : int
+        part of values (one)
+
+    Returns
+    -------
+    mydict : dict
+        user dictionary in dict with one value (1 from n).
+
+    """
+
+    import csv
+        
+    mydict1 = []
+    mydict = {}
+    mydict2 = {}
+    with open(file, encoding=encoding2) as f:
+        reader = csv.reader(f, delimiter=delimiter2)
+        mydict1 = list(reader)
+        for i in mydict1:
+            value = []
+            key = i[0]
+            value = i[part]
+            mydict2[key]=value
+            mydict.update(mydict2)
+        mydict2={}
+    
+    return mydict
+
+
 def countdictplot(dictionary:dict, lang:str, title:str, rotat:int):
     """
     Visualization of frequencies for the analyzed text on a plot.
@@ -232,11 +273,13 @@ def countdictplot(dictionary:dict, lang:str, title:str, rotat:int):
 
 #    mydict_test1 = dict2_csv(r'd:\mydata\sensdict_young.csv', encoding2='utf-8-sig', delimiter2=';')
 #    mydict_test2 = dictn_csv(r'd:\mydata\rusentilex_2017.csv', encoding2='utf-8-sig', delimiter2=';', n=4)
+#    mydict_test3 = dictn_part_csv(r'd:\mydata\words_all_full_rating.csv', encoding2='ANSI', delimiter2=';', part=3)
+#    mydict_test3.pop('Words') #удаляем первую строку, в которой были названия столбцов словаря
     
 #    datawords = words_from_txt('Anan2019.txt', encoding1='utf-8-sig')
 #    print('токенизировали')
     
-#    count_sens_words = count_dict_analysis(datawords, mydict_test2)
+#    count_sens_words = count_dict_analysis(datawords, mydict_test3)
     
 #    mydict_test2 = countdictplot(count_sens_words,title='Частотный анализ категорий ощущений различной модельности', lang='eng', rotat=90)
 
