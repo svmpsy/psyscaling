@@ -281,5 +281,5 @@ def countdictplot(dictionary:dict, lang:str, title:str, rotat:int):
     
 #    count_sens_words = count_dict_analysis(datawords, mydict_test3)
     
-#    mydict_test2 = countdictplot(count_sens_words,title='Частотный анализ категорий ощущений различной модельности', lang='eng', rotat=90)
+#    mydict_test3_plot = countdictplot(count_sens_words,title='Частотный анализ категорий ощущений различной модельности', lang='eng', rotat=90)
 
