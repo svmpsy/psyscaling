@@ -48,7 +48,8 @@ def words_from_txt(file, encoding1):
     #print('tokenized')
 
     mytext1 = mytext.replace('.','') #удаляем точки из текста
-      
+    mytext2 = mytext1.replace('ё','е') #заменяем буквы ё на буквы е (т.к. в словарях нет вариантов написания с буквами ё)
+          
     
     import nltk
     mywords = nltk.word_tokenize(mytext1, language='russian', preserve_line=False) #вытаскиваем слова (токены)
