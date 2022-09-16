@@ -10,11 +10,12 @@ import pandas as pd
 from PIL import Image
 from scipy.cluster.vq import kmeans, vq 
 import matplotlib.pyplot as plt
+from bioinfokit.analys import stat
 
 rgb_basic_colors = np.array([[0., 0., 255.], [0., 255., 0.], [255., 0., 0.],
                              [0., 255., 255.], [255., 0., 255.], [255., 255., 0.]])
 
-L_centroid = np.array([[30., 40., 100.],
+Luscher_centroid = np.array([[30., 40., 100.],
                               [35., 105., 115.],
                               [240., 80., 55.],
                               [255., 250., 105.],
@@ -40,7 +41,7 @@ def color_clasters(img:str,part:int,thumbnail=False,centroids=rgb_basic_colors):
         Параметр указывает количество пикселей по большей стороне. 
         Не может быть больше исходного размера изображения.
     thumbnail : logical, optional
-        Если False - зображение преобразуется в квадратное через усреднение цветности пикселей.   
+        Если False - изображение преобразуется в квадратное через усреднение цветности пикселей.   
         Если True, то изображение преобразуется в миниатюру с сохраненинем пропорций
         с помощью функции Image.thumbnail(). 
         Параметр part указывает количество пикселей по большей стороне. 
@@ -158,7 +159,28 @@ def color_clasters(img:str,part:int,thumbnail=False,centroids=rgb_basic_colors):
     print(Luscher_RGB)
     print()
     
-    aovdt = pd.DataFrame({'distance':distance,'code':code})
+    aovdt = pd.DataFrame({'distance':distance,'code':code, 'R':features[:,0], 'G':features[:,1], 'B':features[:,2]})
+    
+    print('---------------')
+    res_claster = stat()
+    res_claster.anova_stat(df=aovdt, res_var='R', anova_model='R~C(code)')
+    print('Проверка статистической значимости различий кластеров по каналу R (ANOVA)')
+    print(res_claster.anova_summary)
+    print()
+    
+    res_claster = stat()
+    res_claster.anova_stat(df=aovdt, res_var='G', anova_model='G~C(code)')
+    print('Проверка статистической значимости различий кластеров по каналу G (ANOVA)')
+    print(res_claster.anova_summary)
+    print()
+    
+    res_claster = stat()
+    res_claster.anova_stat(df=aovdt, res_var='B', anova_model='B~C(code)')
+    print('Проверка статистической значимости различий кластеров по каналу B (ANOVA)')
+    print(res_claster.anova_summary)
+    print('---------------')
+    print()
+    print()
     
     return aovdt
 
@@ -180,7 +202,6 @@ def aov_claster(df:pd.DataFrame):
 
     """
     
-    from bioinfokit.analys import stat
     import matplotlib.pyplot as plt
     import statsmodels.api as sm
     import seaborn as sns
@@ -252,6 +273,7 @@ def kwtest(df:pd.DataFrame):
     kw = kruskal(data=aovdt, dv='distance', between='code')
     
     print('Kruskal–Wallis')
+    print()
     print(kw) 
     print()
     
