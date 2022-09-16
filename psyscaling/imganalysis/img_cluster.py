@@ -145,7 +145,7 @@ def color_clasters(img:str,part:int,thumbnail=False,centroids=rgb_basic_colors):
     plt.pie(percent,colors=cent1,labels=a)
     plt.show()
     perc = pd.DataFrame({'claster':a,'percent':percent})
-    print('проценты встречаемости цветов палитры в изображении')
+    print('Проценты встречаемости цветов палитры в изображении:')
     print(perc)
     print()
 
@@ -154,7 +154,7 @@ def color_clasters(img:str,part:int,thumbnail=False,centroids=rgb_basic_colors):
     d1=ind_max_centroid[0]
     d2=centroids[d1[0]]
     Luscher_RGB = pd.DataFrame({'claster':d1,'R':d2[0],'G':d2[1],'B':d2[2]})
-    print('самый часто встречающийся цвет палитры:')
+    print('Самый часто встречающийся цвет палитры:')
     print(Luscher_RGB)
     print()
     
