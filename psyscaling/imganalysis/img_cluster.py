@@ -117,7 +117,7 @@ def color_clasters(img:str,part:int,thumbnail=False,centroids=rgb_basic_colors):
         features = []
 
         for x in range(len(im)): #по всем столбцам массива
-            for y in range(len(im[0]+1)): #идти по всем строкам первого столбца
+            for y in range(len(im[0])): #идти по всем строкам первого столбца
                 R = (im[x, y, 0])
                 G = (im[x, y, 1])
                 B = (im[x, y, 2])
