@@ -43,24 +43,28 @@ def words_from_txt(file, encoding1):
                 fline = fline.replace('- ','') #удаляем переносы слов, собираем слова с переносами
                 myarray=fline.split() #разбиваем на слова 
                 for word in myarray: #list2str
-                    if len(word)>3: #для слов, состоящих из более чем 3 букв
+                    p = morph.parse(word)[0].tag
+                    if 'NPRO' in p: # сохраняем  местоимения-существительные
                         mytext = mytext+' '+morph.parse(word)[0].normal_form #Бежим по словам добавляем нормальную форму слов в mywords
-    #print('tokenized')
+                    elif word == 'не' or word == 'нет': # сохраняем отрицания
+                        mytext = mytext+' '+morph.parse(word)[0].normal_form
+                    elif len(word) > 3: #для слов, состоящих из более чем 3 букв
+                        mytext = mytext+' '+morph.parse(word)[0].normal_form
+                    else:
+                        mytext = mytext
+
+    print('морфологический анализ текста выполнен')
 
     mytext1 = mytext.replace('.','') #удаляем точки из текста
     mytext2 = mytext1.replace('ё','е') #заменяем буквы ё на буквы е (т.к. в словарях нет вариантов написания с буквами ё)
-          
+      
     
     import nltk
-    mywords = nltk.word_tokenize(mytext1, language='russian', preserve_line=False) #вытаскиваем слова (токены)
+    mywords = nltk.word_tokenize(mytext2, language='russian', preserve_line=False) #вытаскиваем слова (токены)
     #preserve_line => false - НЕ сохранять номера строк в выходные данные
-      
-    from nltk.corpus import stopwords
-    filtered_words = [word for word in mywords if word not in stopwords.words('russian')] #чистим слова от русских стоп-слов
+    print('токенизация выполнена')
     
-    return filtered_words
-
-
+    return mywords
 
 
 def count_dict_analysis(words:list, dict1:dict):
