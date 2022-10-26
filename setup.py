@@ -11,7 +11,7 @@ requirements = ["ipython>=6", "nbformat>=4", "nbconvert>=5", "requests>=2"]
 
 setup(
     name="psyscaling",
-    version="1.2.1",
+    version="1.2.2",
     author="Svetlana Morozova",
     author_email="svmpsy1@gmail.com",
     description="Psychological scaling of text and graphic information. Used to prepare experimental data for quantitative analysis.",
