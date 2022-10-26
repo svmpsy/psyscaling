@@ -7,7 +7,7 @@ Created on Thu Sep  1 22:34:34 2022
 """
 #open('granici_i_predeli.txt',  encoding='utf-8')
 
-def words_from_txt(file, encoding1):
+def words_from_txt(file, encoding1, wordcloud=True, stopwords=True):
     """
     words_from_txt(file, encoding1) function.
 
@@ -17,7 +17,9 @@ def words_from_txt(file, encoding1):
         Указывается путь к текстовому файлу в формате txt.
     encoding1 : TYPE
         Указывается кдировка. При использовании кодировки utf-8 в файлах .csv и .txt: если 0-й элемент в str считывается как '\ufeff', смените кодировку с utf-8 на utf-8-sig
-
+    stopwords : TYPE 
+        False or True. Нужно ли применять список стоп-слов из библиотеки NLTK. По умолчанию True. 
+        
     Returns
     -------
     filtered_words : list
@@ -32,29 +34,24 @@ def words_from_txt(file, encoding1):
     
     with open(file, encoding=encoding1) as f:
         mytext='' #создаем list
-        skipstr = 0 #ввожу маркер пустой строки (см. строки 19,20 и затем 16,17)
         for fline in f:
-            if skipstr == 1: #если была пустая строка
-                skipstr = 0 #пропускаем ввод слов в mytext, чтобы избавиться от верхних колонтитулов. Возможно, можно убрать постраничные ссылки, закодив поиск списка строк, начинающихся с цифр, перед пустой строкой (концом страницы)
-            else:
-                if len(fline) == 0: #если текущая строка пустая
-                    skipstr = 1 #ставим маркер, что следующую строку пропустить и дальше читаем текущую строку
-                fline = re.sub('[0123456789!{|[\]-}~&(/"#—«$,»%)*+:;<=>?©^_`]','',fline) #удаляем лишние символы из текущей строки (fline)
-                fline = fline.replace('- ','') #удаляем переносы слов, собираем слова с переносами
-                myarray=fline.split() #разбиваем на слова 
-                for word in myarray: #list2str
-                    p = morph.parse(word)[0].tag
-                    if 'NPRO' in p: # сохраняем  местоимения-существительные
-                        mytext = mytext+' '+morph.parse(word)[0].normal_form #Бежим по словам добавляем нормальную форму слов в mywords
-                    elif word == 'не' or word == 'нет': # сохраняем отрицания
-                        mytext = mytext+' '+morph.parse(word)[0].normal_form
-                    elif len(word) > 3: #для слов, состоящих из более чем 3 букв
-                        mytext = mytext+' '+morph.parse(word)[0].normal_form
-                    else:
-                        mytext = mytext
+            fline = re.sub('[0123456789!{|[\]-}~&(/"#—«$,»%)*+:;<=>?©^_`]','',fline) #удаляем всякую фигню из текущей строки (fline). Числа надо удалять сразу, т.к. сноскии иначе будут парсится как часть слова
+            fline = fline.replace('- ','') #удаляем переносы слов, собираем слова с переносами
+            myarray=fline.split() #разбиваем на слова 
+            for word in myarray: #list2str
+                p = morph.parse(word)[0].tag
+                if 'NPRO' in p: # сохраняем  местоимения-существительные
+                    mytext = mytext+' '+morph.parse(word)[0].normal_form #Бежим по словам добавляем нормальную форму слов в mywords
+                elif word == 'не': # сохраняем отрицания
+                    mytext = mytext+' '+morph.parse(word)[0].normal_form
+                elif len(word) > 2: #для слов, состоящих из более чем 3 букв
+                    mytext = mytext+' '+morph.parse(word)[0].normal_form
+                else:
+                    mytext = mytext
+
 
     print('морфологический анализ текста выполнен')
-
+    
     mytext1 = mytext.replace('.','') #удаляем точки из текста
     mytext2 = mytext1.replace('ё','е') #заменяем буквы ё на буквы е (т.к. в словарях нет вариантов написания с буквами ё)
       
@@ -63,6 +60,24 @@ def words_from_txt(file, encoding1):
     mywords = nltk.word_tokenize(mytext2, language='russian', preserve_line=False) #вытаскиваем слова (токены)
     #preserve_line => false - НЕ сохранять номера строк в выходные данные
     print('токенизация выполнена')
+    print()
+    
+    if stopwords==True:
+        from nltk.corpus import stopwords
+        mywords = [word for word in mywords if word not in stopwords.words('russian')] #чистим слова от русских стоп-слов
+    else:
+        if stopwords==False:
+            mywords = mywords
+    
+    
+    if wordcloud == True:
+        from wordcloud import WordCloud
+        #визуализируем токены без биграммы токенов, 50 наиболее часто встречающихся, включаем слова от 3 букв.
+        wordcloud = WordCloud(background_color ='white', colormap='twilight_shifted', 
+                          width = 1000, height = 500, max_words=50, collocations=False, 
+                          min_word_length=3).generate(" ".join(mywords))
+        img = wordcloud.to_image()
+        img.show()
     
     return mywords
 
