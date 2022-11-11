@@ -35,7 +35,7 @@ def words_from_txt(file, encoding1, wordcloud=True, stopwords=True):
     with open(file, encoding=encoding1) as f:
         mytext='' #создаем list
         for fline in f:
-            fline = re.sub('[0123456789!{|[\]-}~&(/"#—«$,»%)*+:;<=>?©^_`]','',fline) #удаляем всякую фигню из текущей строки (fline). Числа надо удалять сразу, т.к. сноскии иначе будут парсится как часть слова
+            fline = re.sub('[0123456789!-{|[\]-}~&(/"#№—«$,»%)*+:;<=>?©^_`]','',fline) #удаляем всякую фигню из текущей строки (fline). Числа надо удалять сразу, т.к. сноскии иначе будут парсится как часть слова
             fline = fline.replace('- ','') #удаляем переносы слов, собираем слова с переносами
             myarray=fline.split() #разбиваем на слова 
             for word in myarray: #list2str
