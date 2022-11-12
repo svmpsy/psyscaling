@@ -33,7 +33,7 @@ def words_from_txt(file, encoding1, wordcloud=True, stopwords=True):
     morph = pymorphy2.MorphAnalyzer() #приводим слова в нормальную форму, затем собираем их в string
     
     with open(file, encoding=encoding1) as f:
-        mytext='' #создаем list
+        mytext='' #создаем str
         for fline in f:
             fline = re.sub('[0123456789!-{|[\]-}~&(/"#№—«$,»%)*+:;<=>?©^_`]','',fline) #удаляем всякую фигню из текущей строки (fline). Числа надо удалять сразу, т.к. сноскии иначе будут парсится как часть слова
             fline = fline.replace('- ','') #удаляем переносы слов, собираем слова с переносами
