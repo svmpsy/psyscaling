@@ -31,4 +31,4 @@ Morozova S.V. Package "psyscaling" for Python / GitHub. - 2022. - URL: https://g
 
 **- copyright**
 
-*Copyright (C) 2022, S.V. Morozova*
+*Copyright (C) 2022-2023, S.V. Morozova*
