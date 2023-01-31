@@ -24,7 +24,7 @@ setup(
                       'seaborn', 'bioinfokit', 'statsmodels', 'pingouin'],
     classifiers=[
         "Programming Language :: Python :: 3.7",
-        "License :: MIT License",
+        "License :: BSD 3-Clause "New" or "Revised" License",
     ],
        
     data_files=[("sensdict.csv", ["psyscaling/textanalysis/dict/sensdict.csv"])],
