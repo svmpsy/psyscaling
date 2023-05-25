@@ -22,10 +22,10 @@ setup(
     install_requires=['pymorphy2', 'nltk', 'matplotlib', 'numpy', 'wordcloud',
                      'pandas', 'Pillow', 'imhist', 'IPython', 'scipy', 
                       'seaborn', 'bioinfokit', 'statsmodels', 'pingouin'],
-    classifiers=[
-        #"Programming Language :: Python :: 3.7",
-        "License :: BSD 3-Clause "New" or "Revised" License",
-    ],
+    #classifiers=[
+    #    "Programming Language :: Python :: 3.7",
+    #    "License :: BSD 3-Clause "New" or "Revised" License",
+    #],
        
     data_files=[("sensdict.csv", ["psyscaling/textanalysis/dict/sensdict.csv"])],
     
