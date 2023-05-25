@@ -23,7 +23,7 @@ setup(
                      'pandas', 'Pillow', 'imhist', 'IPython', 'scipy', 
                       'seaborn', 'bioinfokit', 'statsmodels', 'pingouin'],
     classifiers=[
-        "Programming Language :: Python :: 3.7",
+        #"Programming Language :: Python :: 3.7",
         "License :: BSD 3-Clause "New" or "Revised" License",
     ],
        
