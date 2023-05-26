@@ -10,6 +10,86 @@ Created on Thu Sep  1 22:34:34 2022
 def words_from_txt(file, encoding1, wordcloud=True, stopwords=True):
     """
     words_from_txt(file, encoding1) function.
+    Parameters
+    ----------
+    file : TYPE
+        Указывается путь к текстовому файлу в формате txt.
+    encoding1 : TYPE
+        Указывается кдировка. При использовании кодировки utf-8 в файлах .csv и .txt: если 0-й элемент в str считывается как '\ufeff', смените кодировку с utf-8 на utf-8-sig
+    stopwords : TYPE 
+        False or True. Нужно ли применять список стоп-слов из библиотеки NLTK. По умолчанию True. 
+        
+    Returns
+    -------
+    filtered_words : list
+        Возвращает список токенов: всех слов текста в словарной форме.
+    """
+    
+    import pymorphy2
+    import re
+    
+    morph = pymorphy2.MorphAnalyzer() #приводим слова в нормальную форму, затем собираем их в string
+    
+    with open(file, encoding=encoding1) as f:
+        mytext='' #создаем list
+        for fline in f:
+            fline = re.sub('[0123456789!{|[\]-}~&(/"#—«$,»%)*+:;<=>?©^_`]','',fline) #удаляем всякую фигню из текущей строки (fline). Числа надо удалять сразу, т.к. сноскии иначе будут парсится как часть слова
+            fline = fline.replace('- ','') #удаляем переносы слов, собираем слова с переносами
+            myarray=fline.split() #разбиваем на слова 
+            for word in myarray: #list2str
+                p = morph.parse(word)[0].tag
+                if 'NPRO' in p: # сохраняем  местоимения-существительные
+                    mytext = mytext+' '+morph.parse(word)[0].normal_form #Бежим по словам добавляем нормальную форму слов в mywords
+                elif word == 'не': # сохраняем отрицания
+                    mytext = mytext+' '+morph.parse(word)[0].normal_form
+                elif len(word) > 2: #для слов, состоящих из более чем 3 букв
+                    mytext = mytext+' '+morph.parse(word)[0].normal_form
+                else:
+                    mytext = mytext
+
+
+    print('морфологический анализ текста выполнен')
+    
+    mytext1 = mytext.replace('.','') #удаляем точки из текста
+    mytext2 = mytext1.replace('ё','е') #заменяем буквы ё на буквы е (т.к. в словарях нет вариантов написания с буквами ё)
+    
+    mywords = mytext2.split() #вытаскиваем слова в нормальной форме
+    print('токенизация выполнена')
+    print()
+    
+    if stopwords==True: #список служебных слов вязт из библиотеки NLTK
+        nltk_stopwords = ['и', 'в', 'во', 'не', 'что', 'он', 'на', 'я', 'с', 'со', 'как', 'а', 'то', 'все', 'она', 'так',
+                          'его', 'но', 'да', 'ты', 'к', 'у', 'же', 'вы', 'за', 'бы', 'по', 'только', 'ее', 'мне', 'было',
+                          'вот', 'от', 'меня', 'еще', 'нет', 'о', 'из', 'ему', 'теперь', 'когда', 'даже', 'ну', 'вдруг',
+                          'ли', 'если', 'уже', 'или', 'ни', 'быть', 'был', 'него', 'до', 'вас', 'нибудь', 'опять', 'уж',
+                          'вам', 'ведь', 'там', 'потом', 'себя', 'ничего', 'ей', 'может', 'они', 'тут', 'где', 'есть',
+                          'надо', 'ней', 'для', 'мы', 'тебя', 'их', 'чем', 'была', 'сам', 'чтоб', 'без', 'будто', 'чего',
+                          'раз', 'тоже', 'себе', 'под', 'будет', 'ж', 'тогда', 'кто', 'этот', 'того', 'потому', 'этого',
+                          'какой', 'совсем', 'ним', 'здесь', 'этом', 'один', 'почти', 'мой', 'тем', 'чтобы', 'нее', 'сейчас',
+                          'были', 'куда', 'зачем', 'всех', 'никогда', 'можно', 'при', 'наконец', 'два', 'об', 'другой',
+                          'хоть', 'после', 'над', 'больше', 'тот', 'через', 'эти', 'нас', 'про', 'всего', 'них', 'какая',
+                          'много', 'разве', 'три', 'эту', 'моя', 'впрочем', 'хорошо', 'свою', 'этой', 'перед', 'иногда',
+                          'лучше', 'чуть', 'том', 'нельзя', 'такой', 'им', 'более', 'всегда', 'конечно', 'всю', 'между']
+        mywords = [word for word in mywords if word not in nltk_stopwords] #чистим слова от русских стоп-слов
+    else:
+        if stopwords==False:
+            mywords = mywords
+    
+    
+    if wordcloud == True:
+        from wordcloud import WordCloud
+        #визуализируем токены без биграммы токенов, 50 наиболее часто встречающихся, включаем слова от 3 букв.
+        wordcloud = WordCloud(background_color ='white', colormap='twilight_shifted', 
+                          width = 1000, height = 500, max_words=50, collocations=False, 
+                          min_word_length=3).generate(" ".join(mywords))
+        img = wordcloud.to_image()
+        img.show()
+    
+    return mywords
+
+def words_from_txt1(file, encoding1, wordcloud=True, stopwords=True):
+    """
+    words_from_txt(file, encoding1) function.
 
     Parameters
     ----------
