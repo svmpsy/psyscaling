@@ -21,7 +21,7 @@ pip install git или conda install -c anaconda git*
 
 *Some functions require libraries: nltk, re, csv, cv2, scipy, seaborn, bioinfokit, statsmodels, pingouin.*
 
-*Некоторые функции требуют установки библиотек: nltk, re, csv, cv2, scipy, seaborn, bioinfokit, statsmodels, pingouin.*
+Некоторые функции требуют установки библиотек: nltk, re, csv, cv2, scipy, seaborn, bioinfokit, statsmodels, pingouin.
 
 **- discr**
 
