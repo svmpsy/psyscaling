@@ -143,6 +143,7 @@ def color_clasters(img:str,part:int,thumbnail=False,centroids=rgb_basic_colors):
         l=l+1
     
     #рисуем
+    plt.figure()
     plt.pie(percent,colors=cent1,labels=a)
     plt.show()
     perc = pd.DataFrame({'claster':a,'percent':percent})
@@ -209,7 +210,7 @@ def aov_claster(df:pd.DataFrame):
 
     aovdt = df
     
-    
+    plt.figure()
     plt1 = sns.boxplot(x='code', y='distance', data=aovdt, color='gray')
     plt1
 
@@ -221,7 +222,8 @@ def aov_claster(df:pd.DataFrame):
     print('ANOVA results')
     print(aov_table)
     print()
-
+    
+    plt.figure()
     sm.qqplot(res.anova_std_residuals, line='45')
     plt.xlabel("Theoretical Quantiles")
     plt.ylabel("Standardized Residuals")
@@ -277,6 +279,7 @@ def kwtest(df:pd.DataFrame):
     print(kw) 
     print()
     
+    plt.figure()
     plt2=sns.barplot(x='code', y='distance', data=aovdt, color='gray', estimator = median)
     plt2
     
@@ -319,7 +322,8 @@ def brightness_hist(img:str,color='L',title='Яркость изображени
     print()
     print('Информация об изображении [height, width, channels]:', im.shape )
     print()
-        
+    
+    plt.figure()
     plt.hist(imhist.imhist(im))
     plt.title('Яркость изображения')
     plt.ylabel('Количество пикселей')
