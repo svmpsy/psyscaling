@@ -343,6 +343,7 @@ def countdictplot(dictionary:dict, lang:str, title:str, rotat:int):
     import matplotlib.pyplot as plt
     
     if lang=='rus':
+        plt.figure()
         plt.bar(range(len(dictionary)), list(dictionary.values()), align='center')
         plt.xticks(range(len(dictionary)), list(dictionary.keys()))
         yint = []
@@ -355,6 +356,7 @@ def countdictplot(dictionary:dict, lang:str, title:str, rotat:int):
         plt.xlabel("Категории")
         plt.title(title) # Заголовок диаграммы
     else:
+        plt.figure()
         plt.bar(range(len(dictionary)), list(dictionary.values()), align='center')
         plt.xticks(range(len(dictionary)), list(dictionary.keys()))
         yint = []
