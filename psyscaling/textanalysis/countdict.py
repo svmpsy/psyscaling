@@ -25,10 +25,10 @@ def words_from_txt(file, encoding1, wordcloud=True, stopwords=True):
         Возвращает список токенов: всех слов текста в словарной форме.
     """
     
-    import pymorphy2
+    import pymorphy3
     import re
     
-    morph = pymorphy2.MorphAnalyzer() #приводим слова в нормальную форму, затем собираем их в string
+    morph = pymorphy3.MorphAnalyzer() #приводим слова в нормальную форму, затем собираем их в string
     
     with open(file, encoding=encoding1) as f:
         mytext='' #создаем list
@@ -107,10 +107,10 @@ def words_from_txt1(file, encoding1, wordcloud=True, stopwords=True):
 
     """
     
-    import pymorphy2
+    import pymorphy3
     import re
     
-    morph = pymorphy2.MorphAnalyzer() #приводим слова в нормальную форму, затем собираем их в string
+    morph = pymorphy3.MorphAnalyzer() #приводим слова в нормальную форму, затем собираем их в string
     
     with open(file, encoding=encoding1) as f:
         mytext='' #создаем str
