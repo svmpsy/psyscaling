@@ -7,7 +7,7 @@ Created on Thu Sep  1 22:34:34 2022
 """
 #open('granici_i_predeli.txt',  encoding='utf-8')
 
-def words_from_txt(file, encoding1, wordcloud=True, stopwords=True):
+def words_from_txt(file, encoding1, wordcloud=False, stopwords=True):
     """
     words_from_txt(file, encoding1) function.
     Parameters
@@ -87,7 +87,7 @@ def words_from_txt(file, encoding1, wordcloud=True, stopwords=True):
     
     return mywords
 
-def words_from_txt1(file, encoding1, wordcloud=True, stopwords=True):
+def words_from_txt1(file, encoding1, wordcloud=False, stopwords=True):
     """
     words_from_txt(file, encoding1) function.
 
