@@ -19,7 +19,7 @@ setup(
     long_description_content_type="text/markdown",
     url="https://github.com/svmpsy/psyscaling.git",
     packages=setuptools.find_packages(),
-    install_requires=['pymorphy3', 'matplotlib', 'numpy', 'wordcloud',
+    install_requires=['pymorphy3', 'matplotlib', 'numpy', 
                      'pandas', 'Pillow', 'imhist', 'IPython', 'scipy', 
                       'seaborn', 'bioinfokit', 'statsmodels', 'pingouin'],
     #classifiers=[
