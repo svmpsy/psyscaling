@@ -14,14 +14,18 @@ author: "Morozova S.V."
 
 *pip install git+https://github.com/svmpsy/psyscaling.git*
 
-*If there are problems, you can first install git:
-pip install git или conda install -c anaconda git*
+---
+If there are problems, you can first install git:
+*pip install git или conda install -c anaconda git*
 
-*Простая установка библиотеки psyscaling из архива (через conda prompt, **актуальна в случае, если установщик git выдает ошибку**):
-py -m pip install "https://github.com/svmpsy/psyscaling/archive/refs/heads/main.zip"*
+---
+Простая установка библиотеки psyscaling из архива (через conda prompt, **актуальна в случае, если установщик git выдает ошибку**):
 
+*py -m pip install "https://github.com/svmpsy/psyscaling/archive/refs/heads/main.zip"*
 
-*You can also download the archive from GitHub and install it offline.*
+---
+---
+**You can also download the archive from GitHub and install it offline.**
 
 *Some functions require libraries: nltk, wordcloud, re, csv, cv2, scipy, seaborn, bioinfokit, statsmodels, pingouin.*
 
