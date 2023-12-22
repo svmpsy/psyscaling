@@ -37,7 +37,7 @@ If there are problems, you can first install git:
 ---
 **- сiting**
 
-Morozova S.V. Package "psyscaling" for Python / GitHub. - 2022. - URL: https://github.com/svmpsy/psyscaling.git
+Морозова С.В. Анализ текстов и изображений в психологических исследованиях с помощью библиотеки “psyscaling” // Ананьевские чтения – 2023. 60 лет социальной психологии в СПбГУ: Человек в современном мире: потенциалы и перспективы психологии развития. - Б.м.: «Кириллица», 2023. - С. 140
 
 ---
 **- copyright**
