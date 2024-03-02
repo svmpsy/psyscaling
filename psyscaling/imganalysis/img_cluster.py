@@ -240,7 +240,7 @@ def aov_claster(df:pd.DataFrame):
     #print('POST-HOC')
     #print(res.tukey_summary)
     #print()
-    tukey = pairwise_tukeyhsd(endog=df1['pred'], groups=df1['index'], alpha=0.05)
+    tukey = pairwise_tukeyhsd(endog=aovdt['distance'], groups=aovdt['code'], alpha=0.05)
     print(tukey)
     print()
     
