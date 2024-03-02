@@ -235,10 +235,13 @@ def aov_claster(df:pd.DataFrame):
     print(res.levene_summary)
     print()
 
-    res = stat()
-    res.tukey_hsd(df=aovdt, res_var='distance', xfac_var='code', anova_model='distance ~ C(code)')
-    print('POST-HOC')
-    print(res.tukey_summary)
+    #res = stat()
+    #res.tukey_hsd(df=aovdt, res_var='distance', xfac_var='code', anova_model='distance ~ C(code)')
+    #print('POST-HOC')
+    #print(res.tukey_summary)
+    #print()
+    tukey = pairwise_tukeyhsd(endog=df1['pred'], groups=df1['index'], alpha=0.05)
+    print(tukey)
     print()
     
     descript_stat = aovdt.groupby(['code']).aggregate(['mean','median'])
