@@ -27,7 +27,7 @@ If there are problems, you can first install git:
 
 **You can also download the archive from GitHub and install it offline.**
 
-*Some functions require libraries: nltk, wordcloud, re, csv, cv2(opencv-python), scipy, seaborn, bioinfokit, statsmodels, pingouin.*
+*Some functions require libraries: nltk, wordcloud, re, csv, cv2(opencv), scipy, seaborn, bioinfokit, statsmodels, pingouin.*
 
 ---
 **- discr**
@@ -42,4 +42,4 @@ If there are problems, you can first install git:
 ---
 **- copyright**
 
-*Copyright (C) 2022-2023, S.V. Morozova*
+*Copyright (C) 2022-2024, S.V. Morozova*
