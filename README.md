@@ -1,6 +1,6 @@
 <!---
 title: "README"
-date: '2022-09-01'
+date: '2024-09-30'
 author: "Morozova S.V."
 --->
 
@@ -22,7 +22,7 @@ If there are problems, you can first install git:
 
 Простая установка библиотеки psyscaling из архива (через conda prompt, **актуальна в случае, если установщик git выдает ошибку**):
 
-*pip install "https://github.com/svmpsy/psyscaling/archive/refs/heads/main.zip"*
+*pip install https://github.com/svmpsy/psyscaling/archive/refs/heads/main.zip*
 
 
 **You can also download the archive from GitHub and install it offline.**
