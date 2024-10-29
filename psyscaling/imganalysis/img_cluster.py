@@ -205,6 +205,7 @@ def aov_claster(df:pd.DataFrame):
     
     import matplotlib.pyplot as plt
     import statsmodels.api as sm
+    from statsmodels.stats.multicomp import pairwise_tukeyhsd
     import seaborn as sns
     from numpy import mean
 
