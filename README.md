@@ -42,4 +42,4 @@ If there are problems, you can first install git:
 ---
 **- copyright**
 
-*Copyright (C) 2022-2024, S.V. Morozova*
+*Copyright (C) 2022-2026, S.V. Morozova*
