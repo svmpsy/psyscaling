@@ -1,6 +1,8 @@
 Copyright (c) 2022-2026, Svetlana V. Morozova
 All rights reserved.
 
+cc-by-nc-nd-4.0
+
 Attribution-NonCommercial-NoDerivatives 4.0 International
 
 =======================================================================
